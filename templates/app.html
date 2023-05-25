@@ -1,0 +1,128 @@
+<html>
+
+<head>
+    <style>
+        input,
+        select,
+        textarea {
+            display: block;
+            box-sizing: border-box;
+            width: 100%;
+            border-radius: 0;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .input {
+            padding: 10px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: lightgray;
+            background-color: white;
+
+            &:focus {
+                border-color: gray;
+            }
+
+            &::placeholder {
+                color: gray;
+            }
+        }
+
+        .label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.25em;
+        }
+
+        .input {
+            padding: 10px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: lightgray;
+            background-color: white;
+
+            &:focus {
+                border-color: gray;
+            }
+
+            &::placeholder {
+                color: gray;
+            }
+        }
+
+        body {
+            padding: 0 20px 20px 20px;
+        }
+
+        h1 {
+            margin-bottom: 1em;
+        }
+
+        form {
+            max-width: 500px;
+        }
+
+        .textarea {
+            min-height: 100px;
+            resize: vertical;
+            padding: 10px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: lightgray;
+            background-color: white;
+
+            &:focus {
+                border-color: gray;
+            }
+
+            &::placeholder {
+                color: gray;
+            }
+        }
+    </style>
+    <script>
+        function ask() {
+            // Create an XMLHttpRequest object.
+            const xhr = new XMLHttpRequest();
+
+            // Set the request method and the request URL.
+            xhr.open("GET", "http://127.0.0.1:5000/ask/" + document.getElementById("question").value);
+            console.log("The query = " + "http://127.0.0.1:5000/ask/" + document.getElementById("question").value);
+
+            // Send the request.
+            document.getElementById("answer").innerHTML = "Please wait ... ";
+            console.log("1:" + document.getElementById("answer").innerHTML);
+            xhr.send();
+            console.log("Response received!")
+
+            // Handle the response.
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    console.log("answer = " + xhr.responseText)
+                    // Write the answer to the textarea.
+                    document.getElementById("answer").innerHTML = xhr.responseText;
+                    console.log("2:" + document.getElementById("answer").innerHTML);
+                } else {
+                    // The request failed.
+                    alert("Request failed with status code " + xhr.status);
+                    console.log("3:" + document.getElementById("answer").innerHTML);
+                }
+                console.log("4:" + document.getElementById("answer").innerHTML);
+            };
+        }
+    </script>
+</head>
+
+<h1>Sabby's Private DocBot</a></h1>
+
+<body>
+    <label for="question">Ask your question:</label>
+    <textarea id="question" name="question" rows="4" cols="50"></textarea>
+    <label for="answer">The answer is:</label>
+    <textarea id="answer" name="answer" rows="4" cols="50"></textarea>
+    <button onclick="ask()">Ask me!</button>
+</body>
+
+</html>
