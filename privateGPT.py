@@ -6,7 +6,6 @@ from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.vectorstores import Chroma
 from langchain.llms import GPT4All, LlamaCpp
 import os
-import argparse
 import flask
 
 from flask import render_template
@@ -40,9 +39,7 @@ def index():
 
 @app.route("/ask/<string:s>")
 def ask(s):
-    # return "hello"
-    return my_chatGPT_bot(s)
-
+    return askGPT(s)
 
 def init():
     print("Okay, starting to bootstrap model!")
@@ -92,18 +89,18 @@ def init():
         print("Okay, Model is already bootstrapped and ready to go!")
 
 
-def my_chatGPT_bot(input_text):
+def askGPT(question):
     print("QA the thing")
     init()
 
-    res = qa(input_text)
+    res = qa(question)
 
     print("Response from QA")
     answer = res["result"]
 
     # Print the result
     print("\n\n> Question:")
-    print(input_text)
+    print(question)
     print("\n> Answer:")
     print(answer)
 
@@ -111,6 +108,5 @@ def my_chatGPT_bot(input_text):
 
 
 if __name__ == "__main__":
-    # main()
     init()
     app.run()
