@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_sabbyanandan_privateGPT_1717433177107-pr-trigger-input-set
+  identifier: Build_sabbyanandan_privateGPT_1717433177107prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_sabbyanandan_privateGPT_1717433177107
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
